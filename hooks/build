@@ -1,13 +1,18 @@
 #!/bin/bash
 
 echo "-------------------------------------------------------"
-echo "=> Running post_checkout hook"
+echo "=> Running build hook"
 echo "-------------------------------------------------------"
 
 set -exuo pipefail
 
-echo "env: `env`"
+repo=master
 
-echo "pwd: `pwd`"
+[ "$DOCKER_TAG" != "latest" ] && repo=$DOCKER_TAG
+
+docker build \
+	--build-arg REPO=$repo \
+	--tag $IMAGE_NAME \
+	-f $DOCKERFILE_PATH .
 
 echo "-------------------------------------------------------"
