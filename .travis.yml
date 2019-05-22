@@ -1,0 +1,24 @@
+language: bash
+services: docker
+
+matrix:
+  include:
+    - env: VERSION=19.04
+    - env: VERSION=19.01
+
+before_script:
+  - env | sort
+  - cd "$VERSION"
+  - image="vpp-base:$VERSION"
+
+script:
+  - |
+    (
+      set -Eeuo pipefail
+      set -x
+      docker build -t "$image" .
+      docker run --rm "$image" dpkg-query -W vpp
+    )
+
+after_script:
+  - docker images
