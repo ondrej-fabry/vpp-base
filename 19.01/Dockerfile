@@ -22,7 +22,7 @@ RUN set -eux; \
 		vpp-dev \
 		vpp-plugins \
 		vpp-api-python; \
-	rm -rf /var/lib/apt/lists/*; \
+	rm -rf /var/lib/apt/lists/*;
 
 RUN mkdir -p /var/log/vpp
 

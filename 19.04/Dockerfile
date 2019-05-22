@@ -24,7 +24,7 @@ RUN set -eux; \
 		vpp-plugin-dpdk \
 		vpp-api-python \
 		python3-vpp-api; \
-	rm -rf /var/lib/apt/lists/*; \
+	rm -rf /var/lib/apt/lists/*;
 
 RUN mkdir -p /var/log/vpp
 
