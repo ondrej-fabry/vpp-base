@@ -1,0 +1,19 @@
+#!/bin/bash
+
+echo "-------------------------------------------------------"
+echo "=> Running build hook"
+echo "-------------------------------------------------------"
+
+set -exuo pipefail
+
+_repo=${REPO:-master}
+_tag=${TAG:-master}
+
+[ "$DOCKER_TAG" != "latest" ] && repo=$DOCKER_TAG
+
+docker build \
+	--build-arg REPO=$repo \
+	--tag $IMAGE_NAME \
+	-f $DOCKERFILE_PATH .
+
+echo "-------------------------------------------------------"

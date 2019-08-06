@@ -1,12 +1,21 @@
 #!/bin/bash
 
-set -euo pipefail
-
+echo "-------------------------------------------------------"
 echo "=> Running post_push hook"
+echo "-------------------------------------------------------"
+
+set -exuo pipefail
 
 VPP_VERSION=$(docker run --rm $IMAGE_NAME cat /vpp/version | cut -d~ -f1,2 | sed -e 's/~/./g')
 
 echo "Tagging the image $IMAGE_NAME with additional tag $VPP_VERSION"
 
-docker tag $IMAGE_NAME $DOCKER_REPO:$VPP_VERSION
-docker push $DOCKER_REPO:$VPP_VERSION
+image_repo=$(echo $DOCKER_REPO | sed -r 's/index\.docker\.io\///')
+
+curl -sSflL "https://index.docker.io/v1/repositories/$image_repo/tags/$VPP_VERSION" > /dev/null || {
+	echo "Image tag $DOCKER_REPO:$VPP_VERSION does not exist yet"
+	docker tag $IMAGE_NAME $DOCKER_REPO:$VPP_VERSION
+	docker push $DOCKER_REPO:$VPP_VERSION
+}
+
+echo "-------------------------------------------------------"
