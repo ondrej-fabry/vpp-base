@@ -10,3 +10,7 @@
 |[![19.04](https://img.shields.io/badge/ligato/vpp--base-19.04-blue.svg?logo=docker&logoColor=white&style=popout)][dockerhub] | [![1904](https://img.shields.io/badge/packagecloud-fdio/1904-37327b.svg?logo=debian)](https://packagecloud.io/fdio/1904) | [![](https://images.microbadger.com/badges/image/ligato/vpp-base:19.04.svg)](https://microbadger.com/images/ligato/vpp-base:19.04) |
 
 The complete list of available image tags can be found on [DockerHub][dockerhub-tags].
+
+
+[dockerhub]: https://hub.docker.com/r/ligato/vpp-base
+[dockerhub-tags]: https://hub.docker.com/r/ligato/vpp-base/tags
